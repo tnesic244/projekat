@@ -5,8 +5,8 @@ using namespace std;
 
 const int nv = 1e9; // nema više - beskonačno
 
-int resi(int trt, int vb, vector<vector<int>>& dist, vector<vector<int>>& pamti) {
-    int n = dist.size();
+int resi(int trt,int vb, vector<vector<int>>& dist, vector<vector<int>>& pamti) {
+    int n= dist.size();
     if (vb == (1 << n) - 1) {
         return 0; 
     }
@@ -21,7 +21,7 @@ int resi(int trt, int vb, vector<vector<int>>& dist, vector<vector<int>>& pamti)
             kres = min(kres, no);
         }}
     
-    return pamti[trt][vb] = kres;
+    return pamti[trt][vb] =kres;
 }
 
 int main() {
