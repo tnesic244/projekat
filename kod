@@ -1,0 +1,43 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+const int nv = 1e9; // nema više - beskonačno
+
+int resi(int trt, int vb, vector<vector<int>>& dist, vector<vector<int>>& pamti) {
+    int n = dist.size();
+    if (vb == (1 << n) - 1) {
+        return 0; 
+    }
+    if  (pamti[trt][vb] != -1) {
+        return pamti[trt] [vb];
+    }
+    
+    int kres = nv;
+    for (int s = 0; s < n; ++s) {
+        if (!(vb & (1 << s))) { 
+            int no = dist[trt][s] + resi(s, vb | (1 << s), dist, pamti);
+            kres = min(kres, no);
+        }}
+    
+    return pamti[trt][vb] = kres;
+}
+
+int main() {
+    int n; cin >> n;
+    
+    vector<vector<int>> dist(n, vector<int>(n));
+    for (int i = 0; i < n; ++i){
+        for (int j = 0; j < n; ++j) {
+            cin >> dist[i][j];
+        }}
+    
+    vector<vector<int>> pamti(n,vector<int>(1 << n, -1));
+
+    int kres = resi(0, 0, dist, pamti);
+    
+    cout<< kres << endl;
+    
+    return 0;
+}
